@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <app-navbar></app-navbar>
-    <page-container></page-container>
+    <quotes-page></quotes-page>
   </div>
 </template>
 
 <script>
 import AppNavbar from './components/Navbar';
-import PageContainer from './components/Page';
+import QuotesPage from './components/QuotesPage';
 
 export default {
   components: {
     AppNavbar,
-    PageContainer,
+    QuotesPage,
   },
 };
 </script>

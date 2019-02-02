@@ -1,37 +1,42 @@
 <template>
-    <div>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="1">Processing Center</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">Workspace</template>
-          <el-menu-item index="2-1">item one</el-menu-item>
-          <el-menu-item index="2-2">item two</el-menu-item>
-          <el-menu-item index="2-3">item three</el-menu-item>
-          <el-submenu index="2-4">
-            <template slot="title">item four</template>
-            <el-menu-item index="2-4-1">item one</el-menu-item>
-            <el-menu-item index="2-4-2">item two</el-menu-item>
-            <el-menu-item index="2-4-3">item three</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3" disabled>Info</el-menu-item>
-        <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
-      </el-menu>
+  <nav>
+    <div class="nav-left">
+      <span>Tarantino Movie Quotes</span>
     </div>
+    <div class="nav-right">
+      <div class="nav-item">
+        <i class="el-icon-upload2"></i>
+      </div>
+        <div class="nav-item">
+          <i class="el-icon-plus"></i>
+        </div>
+      </div>
+  </nav>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeIndex: '1',
-      activeIndex2: '1'
-    };
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+<style lang="scss">
+  nav {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
+
+    .nav-left {
+      flex-grow: 1;
+      margin-left: 30px;
+    }
+
+    .nav-right {
+      display: flex;
+      flex-direction: row;
+      margin-right: 30px;
+    }
+
+    .nav-item {
+      margin-left: 15px;
     }
   }
-}
-</script>
+
+</style>
