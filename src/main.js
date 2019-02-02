@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueResource);
 // Vue.http.options.credentials = true;
-Vue.http.options.root = 'https://cors.io/?https://tarantino-quotes.herokuapp.com';
+Vue.http.options.root = 'https://tarantino-quotes.herokuapp.com';
 // Vue.http.options.root = 'http://localhost:3000';
 // Vue.http.headers.common['Authorization'] = 'Quentin';
 Vue.http.options.emulateJSONP = true;

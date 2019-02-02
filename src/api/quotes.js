@@ -16,6 +16,12 @@ export default {
       .then(response => Promise.resolve(response.body))
       .catch(error => Promise.reject(error));
   },
+  updateQuote(quote) {
+    console.log(quote)
+    return Vue.http.patch(`quotes/${quote._id}`, quote)
+      .then(response => Promise.resolve(response.body))
+      .catch(error => Promise.reject(error));
+  },
   deleteQuote(id) {
     return Vue.http.delete(`quotes/${id}`)
       .then(response => Promise.resolve(response.body))

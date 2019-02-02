@@ -3,11 +3,34 @@
     <div class="quote-checkbox">
       <el-checkbox v-model="checked"></el-checkbox>
     </div>
-    <div class="quote-wrapper">
-      <div class="quote-heading">{{ heading }}</div>
-      <div class="quote-body">{{ quote.body }}</div>
+    <div class="quote-wrapper"
+      v-click-outside="updateBody"
+      @click="handleBodyClick"
+    >
+      <div class="quote-heading form-inline"
+        v-if="isEditing"
+      >
+        <el-input placeholder="Please input" v-model="quote.character"></el-input>
+        <el-input placeholder="Please input" v-model="quote.movie"></el-input>
+      </div>
+      <div class="quote-heading"
+        v-if="!isEditing"
+      >
+        {{ quote.character }}
+        in
+        {{ quote.movie }}
+      </div>
+      <div class="quote-body"
+        v-if="isEditing"
+        @keyup.enter="updateBody"
+        >
+        <el-input placeholder="Please input" v-model="quote.body"></el-input>
+      </div>
+      <div class="quote-body"
+        v-if="!isEditing"
+      >{{ quote.body }}</div>
       <div class="quote-delete"
-        v-if="deleteIsVisible"
+        v-if="showDelete"
         @click="removeHandler"
         >
         <i class="el-icon-delete"></i>
@@ -17,12 +40,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import ClickOutside from 'vue-click-outside'
+
 export default {
   data() {
     return {
       checked: true,
       deleteIsVisible: false,
-      editingBody: false,
+      isEditing: false,
     };
   },
   props: ['quote'],
@@ -30,14 +56,31 @@ export default {
     heading: function () {
       return `${this.quote.character} in ${this.quote.movie}`
     },
+    showDelete: function () {
+      return this.deleteIsVisible && !this.isEditing
+    }
   },
   methods: {
+    ...mapActions([
+      'updateQuote',
+    ]),
     removeHandler() {
       this.$emit('removeClicked', this.quote.id);
     },
     toggleDelete() {
       this.deleteIsVisible = !this.deleteIsVisible;
     },
+    handleBodyClick() {
+      this.isEditing = true;
+    },
+    updateBody(event) {
+      event.preventDefault()
+      this.updateQuote(this.quote);
+      this.isEditing = false;
+    }
+  },
+  directives: {
+    ClickOutside
   },
 };
 </script>
@@ -70,6 +113,16 @@ export default {
     right: 10px;
     top: 10px;
     cursor: pointer;
+  }
+}
+
+</style>
+
+<style lang="scss" scoped>
+.form-inline {
+  display: flex;
+  .el-input {
+    margin-right: 15px;
   }
 }
 

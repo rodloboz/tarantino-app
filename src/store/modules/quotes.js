@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import quotesApi from '../../api/quotes';
 
 const READY = 'READY'
@@ -30,6 +31,12 @@ const actions = {
         });
     });
   },
+  updateQuote({ commit }, quote) {
+    return new Promise((resolve, reject) => {
+      commit(UPDATE_QUOTE, quote);
+      resolve(quote)
+    });
+  },
 };
 
 const mutations = {
@@ -47,7 +54,7 @@ const mutations = {
   },
   [UPDATE_QUOTE](state, payload) {
     const index = state.all.findIndex(quote => quote.id === payload.id);
-    state.all[index] = payload;
+    Vue.set(state.all, index, payload);
   },
 };
 
